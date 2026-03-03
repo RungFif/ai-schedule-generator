@@ -42,6 +42,8 @@ dependencies:
   googleapis_auth: ^2.0.0
   # Add events to native calendar apps without OAuth
   add_2_calendar: ^2.0.0
+  # Open URLs (used to open Google Calendar templates in browser)
+  url_launcher: ^6.1.10
   # Preview tampilan di berbagai ukuran device saat development
   device_preview: ^1.3.1
 
