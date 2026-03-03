@@ -2,8 +2,8 @@ import 'dart:convert'; // Untuk encode/decode JSON
 import 'package:http/http.dart' as http;
 
 class GeminiService {
-  // API Key - GANTI dengan milikmu (jangan hardcode di production!)
-  static const String apiKey = "AIzaSyAuYBeL5JEcweNBJDp1feBCkxh6P4qNB28";
+  // API key should be provided via environment variable or secrets management
+  static const String apiKey = String.fromEnvironment('GOOGLE_API_KEY');
 
   // Endpoint Gemini API (generateContent)
   static const String baseUrl =
