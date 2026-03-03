@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Untuk fitur copy ke clipboard
 import 'package:flutter_markdown/flutter_markdown.dart'; // Untuk render Markdown
+import '../services/calendar_service.dart';
 
 class ScheduleResultScreen extends StatelessWidget {
   final String scheduleResult; // Data hasil dari AI
@@ -116,6 +117,26 @@ class ScheduleResultScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
+              // TOMBOL TAMBAH KE KALENDER
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () async {
+                    try {
+                      await CalendarService.openScheduleInGoogleCalendar(
+                        scheduleResult,
+                      );
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Gagal membuka kalender: $e')),
+                      );
+                    }
+                  },
+                  icon: const Icon(Icons.calendar_today),
+                  label: const Text("Tambahkan ke Google Calendar"),
+                ),
+              ),
+              const SizedBox(height: 10),
               // TOMBOL KEMBALI
               SizedBox(
                 width: double.infinity,

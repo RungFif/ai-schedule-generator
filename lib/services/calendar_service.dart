@@ -119,4 +119,37 @@ class CalendarService {
       current = end;
     }
   }
+
+  /// Open the full schedule as a single Google Calendar event.
+  /// `scheduleText` will be placed into the `details` field of the event.
+  /// Defaults to an event starting at 08:00 local time for 1 hour.
+  static Future<void> openScheduleInGoogleCalendar(
+    String scheduleText, {
+    DateTime? startDate,
+    String title = 'AI Generated Schedule',
+    int durationMinutes = 60,
+  }) async {
+    final now = startDate ?? DateTime.now();
+    final start = DateTime(now.year, now.month, now.day, 8, 0);
+    final end = start.add(Duration(minutes: durationMinutes));
+
+    final startStr = _formatToUTCString(start);
+    final endStr = _formatToUTCString(end);
+
+    String encode(String s) => Uri.encodeComponent(s).replaceAll('%20', '+');
+
+    final titleE = encode(title);
+    final detailsE = encode(scheduleText);
+    final locationE = encode('');
+
+    final urlString =
+        'https://calendar.google.com/calendar/render?action=TEMPLATE&text=$titleE&details=$detailsE&location=$locationE&dates=$startStr/$endStr';
+
+    final uri = Uri.parse(urlString);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw Exception('Could not open Google Calendar URL');
+    }
+  }
 }
