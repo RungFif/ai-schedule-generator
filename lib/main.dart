@@ -28,16 +28,16 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'AI Schedule Generator',
 
-      // Tema global menggunakan Material 3
+      // Tema global menggunakan Material 3 (Futuristic Blue & White)
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo, // warna brand utama
-          brightness: Brightness.light,
+          seedColor: const Color(0xFF00E5FF), // Cyan neon blue
+          brightness: Brightness.dark,
         ),
         useMaterial3: true,
-        scaffoldBackgroundColor: Colors.grey[50],
+        scaffoldBackgroundColor: const Color(0xFF0A192F), // Deep blue
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.indigo,
+          backgroundColor: Colors.transparent,
           foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
